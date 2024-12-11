@@ -9,19 +9,24 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('detail_transaksis', function (Blueprint $table) {
-            $table->id();
+        Schema::create('transaction_details', function (Blueprint $table) {
+            $table->id('id')->primary();
+            $table->unsignedBigInteger('transaction_id');
+            $table->integer('quantity');
+            $table->decimal('price_at_sale', 10, 2);
+            $table->unsignedBigInteger('product_id');
+
+            $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('detail_transaksis');
+        Schema::dropIfExists('transaction_details');
     }
 };

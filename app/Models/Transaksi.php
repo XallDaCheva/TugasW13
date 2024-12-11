@@ -9,7 +9,7 @@ class Transaksi extends Model
 {
     use HasFactory;
 
-    protected $table = 'transaction'; // Sesuaikan dengan nama tabel
+    protected $table = 'transactions'; // Sesuaikan dengan nama tabel
     protected $fillable = ['date', 'total_amount'];
 
     public function transactionDetails()
